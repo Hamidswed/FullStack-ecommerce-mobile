@@ -19,11 +19,23 @@ export const createProductController = async (req: Request, res: Response) => {
   }
 };
 
-export const getProductListController=async(req: Request, res: Response)=>{
+export const getProductListController = async (req: Request, res: Response) => {
   try {
-    const productList = await ProductServices.getProductList()
-    res.json(productList)
+    const productList = await ProductServices.getProductList();
+    res.json(productList);
   } catch (error) {
     console.log(error);
   }
-}
+};
+
+export const deleteProductByIdController = async (
+  req: Request,
+  res: Response
+) => {
+  try {
+    const foundProduct = await ProductServices.deleteProductById(req.params.id);
+    res.json(foundProduct);
+  } catch (error) {
+    console.log(error);
+  }
+};

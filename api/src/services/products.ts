@@ -12,4 +12,8 @@ const getProductList = async():Promise<ProductDocument[]>=>{
   return Product.find()
 }
 
-export default { createProduct,getProductList };
+const deleteProductById = async(id:string):Promise<ProductDocument|null>=>{
+  return Product.findByIdAndDelete(id)
+}
+
+export default { createProduct,getProductList,deleteProductById };
