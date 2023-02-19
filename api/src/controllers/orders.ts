@@ -5,7 +5,7 @@ import OrderServices from "../services/orders";
 export const createOrderController = async (req: Request, res: Response) => {
   try {
     const newOrder = new Order({
-      userId: req.body.userId,
+      userId: req.params.userId,
       productOrder: req.body.productOrder,
     });
     const order = await OrderServices.createOrder(newOrder);
@@ -14,4 +14,3 @@ export const createOrderController = async (req: Request, res: Response) => {
     console.log(error);
   }
 };
-
