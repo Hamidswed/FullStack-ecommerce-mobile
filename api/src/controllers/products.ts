@@ -39,3 +39,15 @@ export const deleteProductByIdController = async (
     console.log(error);
   }
 };
+
+export const updateProductController = async (req: Request, res: Response) => {
+  try {
+    const updatedProduct = await ProductServices.updateProduct(
+      req.params.id,
+      req.body
+    );
+    res.json(updatedProduct);
+  } catch (error) {
+    console.log(error);
+  }
+};
