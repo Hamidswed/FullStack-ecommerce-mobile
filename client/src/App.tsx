@@ -5,7 +5,7 @@ import Products from "./pages/Products";
 import Cart from "./pages/Cart";
 import Login from "./pages/Login";
 import ProductDetail from "./pages/ProductDetail";
-import Favorites from "./pages/Favorites";
+import Favorites from "./pages/"
 
 function App() {
   return (
