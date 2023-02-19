@@ -10,8 +10,17 @@ export const createUserController = async (req: Request, res: Response) => {
       email: req.body.email,
       password: req.body.password,
     });
-    const user =await UserServices.createUser(newUser)
-    res.json(user)
+    const user = await UserServices.createUser(newUser);
+    res.json(user);
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const getUserByIdController = async (req: Request, res: Response) => {
+  try {
+    const foundUser = await UserServices.getUserById(req.params.id);
+    res.json(foundUser);
   } catch (error) {
     console.log(error);
   }
