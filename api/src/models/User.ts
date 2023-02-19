@@ -1,11 +1,15 @@
-import mongoose,{Document} from "mongoose";
+import mongoose, { Document } from "mongoose";
 
-type UserDocument = Document &{
-  firstName:string
-  lastName:string
-  email:string
-
-}
+export type UserDocument = Document & {
+  firstName: string;
+  lastName: string;
+  email: string;
+  password: string;
+  telephone: number;
+  address: string;
+  image: string;
+  DOB: Date;
+};
 const UserSchema = new mongoose.Schema({
   firstName: {
     type: String,
@@ -33,7 +37,10 @@ const UserSchema = new mongoose.Schema({
   image: {
     type: String,
   },
-  
+  DOB: {
+    type: Date,
+    default: Date.now(),
+  },
 });
 
-export default mongoose.model('User', UserSchema)
+export default mongoose.model<UserDocument>("User", UserSchema);
