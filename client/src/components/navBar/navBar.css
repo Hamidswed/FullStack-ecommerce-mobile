@@ -1,0 +1,19 @@
+.navbar{
+  display: flex;
+  padding: 15px 80px;
+  height: 60px;
+  background-color: gray;
+  align-items: center;
+}
+.navbar-logo{
+  flex:2
+}
+.navbar-logo svg{
+  width: 20%;
+}
+.navbar-menu{
+  flex:1;
+  display: flex;
+  justify-content: flex-end;
+  gap: 30px;
+}
