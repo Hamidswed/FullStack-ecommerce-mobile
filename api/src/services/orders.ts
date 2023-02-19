@@ -1,7 +1,11 @@
-import { OrderDocument } from "../models/Order";
+import Order, { OrderDocument } from "../models/Order";
 
-const createOrder = async(order:OrderDocument):Promise<OrderDocument>=>{
-  return order.save()
-}
+const createOrder = async (order: OrderDocument): Promise<OrderDocument> => {
+  return order.save();
+};
 
-export default {createOrder}
+const getOrderByUserId = async (userId: string): Promise<OrderDocument[]> => {
+  return Order.find({ userId: userId });
+};
+
+export default { createOrder, getOrderByUserId };

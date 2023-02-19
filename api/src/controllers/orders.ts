@@ -14,3 +14,12 @@ export const createOrderController = async (req: Request, res: Response) => {
     console.log(error);
   }
 };
+
+export const getOrderByUserIdController = async (req: Request, res: Response) => {
+  try {
+    const foundOrder = await OrderServices.getOrderByUserId(req.params.userId);
+    res.json(foundOrder);
+  } catch (error) {
+    console.log(error);
+  }
+};
