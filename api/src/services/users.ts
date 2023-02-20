@@ -8,4 +8,8 @@ const getUserById = async (id: string): Promise<UserDocument | null> => {
   return User.findById(id);
 };
 
-export default { createUser, getUserById };
+const findUserByEmailPassword = async (email: string, password:string): Promise<UserDocument | null> => {
+  return User.findOne({ email: email, password:password });
+};
+
+export default { createUser, getUserById, findUserByEmailPassword };
