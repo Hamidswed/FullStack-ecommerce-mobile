@@ -34,9 +34,14 @@ const JWT_SECRET = process.env.JWT_SECRET as string;
 export const logInWithPassword = async (req: Request, res: Response) => {
   try {
     // get user information from DB and make token (with jsonwebtoken packages)
-    const userData = await UserServices.findUserByEmailPassword(req.body.email, req.body.password);
+    const userData = await UserServices.findUserByEmailPassword(
+      req.body.email,
+      req.body.password
+    );
     if (!userData) {
-      res.json({ message: `${req.body.email} is invalid or password is wrong` });
+      res.json({
+        message: `${req.body.email} is invalid or password is wrong`,
+      });
       return;
     }
 
@@ -46,6 +51,15 @@ export const logInWithPassword = async (req: Request, res: Response) => {
       { expiresIn: "1h" }
     );
     res.json({ userData, token });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const updateUserController = async (req: Request, res: Response) => {
+  try {
+    const updatedUser = await UserServices.updateUser(req.params.id, req.body);
+    res.json(updatedUser);
   } catch (error) {
     console.log(error);
   }
