@@ -39,11 +39,18 @@ export const logInWithPassword = async (req: Request, res: Response) => {
   try {
     // get user information from DB and make token (with jsonwebtoken packages)
     const userData = await UserServices.findUserByEmailPassword(req.body.email);
-    console.log(req.body, "req.body");
     if (!userData) {
       res.json({
         message: `${req.body.email} is invalid or password is wrong`,
       });
+      return;
+    }
+    //compare password form login form and hashed password from DB
+    const passwordFromForm = req.body.password;
+    const passwordFromDB = userData.password;
+    const match = await bcrypt.compare(passwordFromForm, passwordFromDB);
+    if (!match) {
+      res.json({ message: "wrong password!" });
       return;
     }
 
