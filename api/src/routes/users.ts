@@ -12,7 +12,7 @@ router.post("/", createUserController);
 router.get("/:id", getUserByIdController);
 router.post("/login", logInWithPassword);
 router.put(
-  "/",
+  "/:id",
   passport.authenticate("jwt", { session: false }),
   updateUserController
 );

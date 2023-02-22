@@ -30,11 +30,13 @@ export const getUserByIdController = async (req: Request, res: Response) => {
 
 export const logInWithPassword = async (req: Request, res: Response) => {
   try {
+    
     // get user information from DB and make token (with jsonwebtoken packages)
     const userData = await UserServices.findUserByEmailPassword(
       req.body.email,
       req.body.password
     );
+    console.log(req.body,'req.body');
     if (!userData) {
       res.json({
         message: `${req.body.email} is invalid or password is wrong`,
