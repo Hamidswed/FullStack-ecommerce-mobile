@@ -5,10 +5,6 @@ export type UserDocument = Document & {
   lastName: string;
   email: string;
   password: string;
-  telephone: number;
-  address: string;
-  image: string;
-  DOB: Date;
 };
 const UserSchema = new mongoose.Schema({
   firstName: {
@@ -27,19 +23,6 @@ const UserSchema = new mongoose.Schema({
   password: {
     type: String,
     required: true,
-  },
-  telephone: {
-    type: Number,
-  },
-  address: {
-    type: String,
-  },
-  image: {
-    type: String,
-  },
-  DOB: {
-    type: Date,
-    default: Date.now(),
   },
 });
 

@@ -2,14 +2,21 @@ import { Request, Response } from "express";
 import User from "../models/User";
 import UserServices from "../services/users";
 import generateToken from "../utils/generateToken";
+import bcrypt from "bcrypt";
 
 export const createUserController = async (req: Request, res: Response) => {
   try {
+    //get password from the body
+    const { firstName, lastName, email, password } = req.body;
+    //hash password
+    const saltRounds = await bcrypt.genSalt(10); //complexity of the password
+    const hashedPassword = await bcrypt.hash(password, saltRounds);
+    console.log(hashedPassword);
     const newUser = new User({
-      firstName: req.body.firstName,
-      lastName: req.body.lastName,
-      email: req.body.email,
-      password: req.body.password,
+      firstName: firstName,
+      lastName: lastName,
+      email: email,
+      password: hashedPassword,
     });
     const user = await UserServices.createUser(newUser);
     if (user !== "available") res.json(user) && res.status(200);
