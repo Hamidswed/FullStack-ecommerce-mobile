@@ -14,10 +14,7 @@ export const jwtStrategy = new JwtStrategy(
   //payload (body): all information that you send it from frontend side (new email,...)
   //done: shows that the authentication is done and you can move to next step
   async (payload, done) => {
-    const foundUser = await UserServices.findUserByEmailPassword(
-      payload.email,
-      payload.password
-    );
+    const foundUser = await UserServices.findUserByEmailPassword(payload.email);
     if (!foundUser) {
       return "no user!";
     }

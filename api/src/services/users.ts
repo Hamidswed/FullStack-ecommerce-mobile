@@ -13,10 +13,9 @@ const getUserById = async (id: string): Promise<UserDocument | null> => {
 };
 
 const findUserByEmailPassword = async (
-  email: string,
-  password: string
+  email: string
 ): Promise<UserDocument | null> => {
-  return User.findOne({ email: email, password: password });
+  return User.findOne({ email: email });
 };
 
 const updateUser = async (
