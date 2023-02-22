@@ -1,7 +1,11 @@
 import User, { UserDocument } from "../models/User";
 
-const createUser = async (user: UserDocument): Promise<UserDocument> => {
-  return user.save();
+const createUser = async (
+  user: UserDocument
+): Promise<UserDocument | string> => {
+  const foundUser = await User.findOne({ email: user.email });
+  if (!foundUser) return user.save();
+  else return "available";
 };
 
 const getUserById = async (id: string): Promise<UserDocument | null> => {

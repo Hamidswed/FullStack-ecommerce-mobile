@@ -1,8 +1,7 @@
 import { Request, Response } from "express";
 import User from "../models/User";
 import UserServices from "../services/users";
-import jwt from "jsonwebtoken";
-import dotenv from "dotenv";
+import generateToken from "../utils/generateToken";
 
 export const createUserController = async (req: Request, res: Response) => {
   try {
@@ -13,7 +12,8 @@ export const createUserController = async (req: Request, res: Response) => {
       password: req.body.password,
     });
     const user = await UserServices.createUser(newUser);
-    res.json(user);
+    if (user !== "available") res.json(user) && res.status(200);
+    else res.json({ message: "available" });
   } catch (error) {
     console.log(error);
   }
@@ -28,9 +28,6 @@ export const getUserByIdController = async (req: Request, res: Response) => {
   }
 };
 
-//get JWT_SECRET
-dotenv.config();
-const JWT_SECRET = process.env.JWT_SECRET as string;
 export const logInWithPassword = async (req: Request, res: Response) => {
   try {
     // get user information from DB and make token (with jsonwebtoken packages)
@@ -45,11 +42,7 @@ export const logInWithPassword = async (req: Request, res: Response) => {
       return;
     }
 
-    const token = jwt.sign(
-      { email: req.body.email, _id: userData._id },
-      JWT_SECRET,
-      { expiresIn: "1h" }
-    );
+    const token = generateToken(userData._id, req.body.email);
     res.json({ userData, token });
   } catch (error) {
     console.log(error);
