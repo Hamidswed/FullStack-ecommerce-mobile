@@ -1,8 +1,67 @@
+.hero{
+  position: relative;
+  height: 850px;
+  overflow: hidden;
+}
 .hero-video{
   background-color: black;
+  position: fixed;
 }
 .hero-video video{
   width: 100%;
   filter: grayscale(1);
   opacity: .6;
+}
+.hero-frame{
+  position: absolute;
+  top: 0;
+}
+.hero-frame img{
+  width: 100%;
+}
+.hero-text{
+  position: fixed;
+  top: 240px;
+  left: 200px;
+  text-align: left;
+}
+.hero-text h3{
+  font-size: 40px;
+  color: #fff;
+  font-weight: normal;
+}
+.hero-text h1{
+  font-size: 70px;
+  color: #ECA820;
+}
+.hero-text h1>span{
+  color: #006EB6;
+}
+.hero-text p{
+  color: #fff;
+  font-size: 25px;
+  margin-top: 20px;
+  cursor: pointer;
+}
+.hero-start span{
+  display: inline-block;
+  position: relative;
+  transition: 0.5s;
+  color: lightgray;
+  margin-left:40px;
+}
+.hero-text a{
+  text-decoration: none;
+}
+.hero-start span:after{
+  content: '\2192';
+  position: absolute;
+  opacity: 0;
+  top:-25px;
+  right: 20px;
+  transition: 0.3s;
+}
+.hero-start:hover span:after{
+  opacity: 1;
+  right: 0;
 }

@@ -88,6 +88,7 @@ export default function NavBar() {
           </Link>
         </Tooltip>
       </div>
+      <div className="navbar-right" />
     </div>
   );
 }
