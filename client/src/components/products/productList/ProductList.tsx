@@ -3,15 +3,16 @@ import { useDispatch, useSelector } from "react-redux/es/exports";
 import { AppDispatch, RootState } from "../../../redux/store";
 import { fetchProductDate } from "../../../redux/thunks/product";
 import ProductItem from "../productItem/ProductItem";
-import "./productList.css"
+import "./productList.css";
 
 export default function ProductList() {
+  const userInput = useSelector((state: RootState) => state.search.userInput);
   const productList = useSelector((state: RootState) => state.product.products);
   const dispatch = useDispatch<AppDispatch>();
 
   useEffect(() => {
-    dispatch(fetchProductDate());
-  }, [dispatch]);
+    userInput === "" && dispatch(fetchProductDate());
+  }, [dispatch, userInput]);
   console.log(productList);
 
   return (
