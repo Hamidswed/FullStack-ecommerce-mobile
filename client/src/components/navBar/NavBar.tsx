@@ -15,6 +15,9 @@ export default function NavBar() {
   const user = useSelector((state: RootState) => state.user.user);
   const cartState = useSelector((state: RootState) => state.product.carts);
   const favState = useSelector((state: RootState) => state.product.favorites);
+  const productDetail = useSelector(
+    (state: RootState) => state.product.productDetail
+  );
   let { pathname } = useLocation();
 
   const StyledBadge = styled(Badge)<BadgeProps>(() => ({
@@ -26,14 +29,24 @@ export default function NavBar() {
   }));
 
   return (
-    <div className={pathname === "/" ? "navbar" : "navbar navbar-blur"}>
+    <div
+      className={
+        pathname === "/" || pathname === `/products/${productDetail._id}`
+          ? "navbar"
+          : "navbar navbar-blur"
+      }
+    >
       <div className="navbar-logo">
         <Link to="/">
           <Logo />
         </Link>
       </div>
       <div
-        className={pathname === "/" ? "btn-white navbar-menu" : "navbar-menu"}
+        className={
+          pathname === "/" || pathname === `/products/${productDetail._id}`
+            ? "btn-white navbar-menu"
+            : "navbar-menu"
+        }
       >
         <Tooltip title="Home">
           <Link to="/">

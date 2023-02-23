@@ -41,7 +41,7 @@ export const logInWithPassword = async (req: Request, res: Response) => {
     const userData = await UserServices.findUserByEmailPassword(req.body.email);
     if (!userData) {
       res.json({
-        message: `${req.body.email} is invalid or password is wrong`,
+        message: "invalid",
       });
       return;
     }

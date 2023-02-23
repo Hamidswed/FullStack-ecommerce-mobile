@@ -44,7 +44,6 @@ const productSlice = createSlice({
       const index = state.carts.findIndex(
         (item) => item._id === action.payload._id
       );
-      // const updatedProduct = { ...action.payload, qty: 1 };
 
       if (index === -1) {
         state.carts.push(action.payload);

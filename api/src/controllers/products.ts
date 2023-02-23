@@ -28,6 +28,15 @@ export const getProductListController = async (req: Request, res: Response) => {
   }
 };
 
+export const getProductByIdController = async (req: Request, res: Response) => {
+  try {
+    const foundUser = await ProductServices.getProductById(req.params.id);
+    res.json(foundUser);
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 export const deleteProductByIdController = async (
   req: Request,
   res: Response

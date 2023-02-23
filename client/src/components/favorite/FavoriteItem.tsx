@@ -3,22 +3,16 @@ import { ProductType } from "../../types/productType";
 //mui
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import AddShoppingCartOutlinedIcon from "@mui/icons-material/AddShoppingCartOutlined";
-import {
-  IconButton,
-  TableBody,
-  TableCell,
-  TableRow,
-} from "@mui/material";
+import { IconButton, TableBody, TableCell, TableRow } from "@mui/material";
 import { useDispatch } from "react-redux";
-import { AppDispatch } from "../../redux/store";
-import { productActions } from './../../redux/slices/product';
+import { productActions } from "./../../redux/slices/product";
 type PropType = {
   favorite: ProductType;
-  row:number
+  row: number;
 };
 
-const FavoriteItem = ({ favorite,row }: PropType) => {
-  const dispatch = useDispatch<AppDispatch>();
+const FavoriteItem = ({ favorite, row }: PropType) => {
+  const dispatch = useDispatch();
 
   function addToCart() {
     dispatch(productActions.removeFromFavorite(favorite));
@@ -41,7 +35,9 @@ const FavoriteItem = ({ favorite,row }: PropType) => {
         <TableCell align="center">${favorite.price}</TableCell>
         <TableCell align="center">
           <IconButton
-            onClick={() => dispatch(productActions.removeFromFavorite(favorite))}
+            onClick={() =>
+              dispatch(productActions.removeFromFavorite(favorite))
+            }
           >
             <FavoriteIcon sx={{ color: "red" }} />
           </IconButton>

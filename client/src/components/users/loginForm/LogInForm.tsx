@@ -6,9 +6,8 @@ import * as Yup from "yup";
 import { useState } from "react";
 import "./loginForm.css";
 import { useDispatch } from "react-redux";
-import { AppDispatch, RootState } from "../../../redux/store";
-import { useSelector } from "react-redux";
-import { userActions } from "../../../redux/slices/user"
+import { AppDispatch } from "../../../redux/store";
+import { userActions } from "../../../redux/slices/user";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import axios from "axios";
@@ -21,7 +20,6 @@ export type InitialType = {
 const LogInForm = () => {
   const [open, setOpen] = useState(false);
   const [showPass, setShowPass] = useState(false);
-  const isLogin = useSelector((state: RootState) => state.user.isLogin);
   const dispatch = useDispatch<AppDispatch>();
 
   const showPassHandler = () => {
@@ -51,13 +49,7 @@ const LogInForm = () => {
     email: Yup.string()
       .email("Invalid email")
       .required("Please Enter your email"),
-    password: Yup.string()
-      .min(7, "It should be more than 6 character")
-      // .matches(
-      //   /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.{8,})/,
-      //   "Must Contain 8 Characters, One Uppercase, One Lowercase and One Number"
-      // )
-      .required("Please Enter your password"),
+    password: Yup.string().required("Please Enter your password"),
   });
   const navigate = useNavigate();
 
@@ -66,13 +58,15 @@ const LogInForm = () => {
       .post("http://localhost:8000/users/login", values)
       .then((res) => res.data)
       .then((data) => {
-        console.log(data,'data');
-        dispatch(userActions.getUser(data.userData));
-        const token = data.token
-        localStorage.setItem("token",token)
+        console.log(data, "data");
+        if (data.message !== "invalid") {
+          dispatch(userActions.getUser(data.userData));
+        } else handleClick();
+
+        const token = data.token;
+        localStorage.setItem("token", token);
         token && navigate("/user");
       });
-    !isLogin && handleClick();
   };
 
   return (
