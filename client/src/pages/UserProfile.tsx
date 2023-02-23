@@ -1,4 +1,10 @@
+import Profile from "../components/users/userProfile/Profile";
+
 const UserProfile = () => {
-  return <div>user profile</div>;
+  return (
+    <div>
+      <Profile />
+    </div>
+  );
 };
 export default UserProfile;

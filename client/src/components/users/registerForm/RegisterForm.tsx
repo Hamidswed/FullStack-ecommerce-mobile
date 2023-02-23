@@ -1,4 +1,5 @@
-import { Button, TextField } from "@mui/material";
+import { Alert, Button, TextField } from "@mui/material";
+import Snackbar from "@mui/material/Snackbar";
 import { Form, Formik } from "formik";
 import * as Yup from "yup";
 import axios from "axios";
@@ -8,8 +9,25 @@ import { useState } from "react";
 import { UserType } from "../../../types/userType";
 
 const RegisterForm = () => {
-  const [isAvailable, setIsAvailable] = useState(false);
+  const [open, setOpen] = useState(false);
+
+  const handleClick = () => {
+    setOpen(true);
+  };
+
+  const handleClose = (
+    event?: React.SyntheticEvent | Event,
+    reason?: string
+  ) => {
+    if (reason === "clickaway") {
+      return;
+    }
+
+    setOpen(false);
+  };
+
   const initialValues: UserType = {
+    _id: "",
     firstName: "",
     lastName: "",
     email: "",
@@ -35,7 +53,7 @@ const RegisterForm = () => {
     axios.post("http://localhost:8000/users", values).then((res) => {
       console.log(res.data, "data");
       if (res.data.message === "available") {
-        setIsAvailable(true);
+        handleClick();
       } else res.status === 200 && navigate("/login");
     });
   };
@@ -50,11 +68,6 @@ const RegisterForm = () => {
         {({ values, errors, touched, handleChange }) => {
           return (
             <Form className="form">
-              {isAvailable ? (
-                <p style={{ color: "red" }}>
-                  {values.email} is already registerd!
-                </p>
-              ) : null}
               <div>
                 <TextField
                   required
@@ -107,6 +120,11 @@ const RegisterForm = () => {
           );
         }}
       </Formik>
+      <Snackbar open={open} autoHideDuration={3000} onClose={handleClose}>
+        <Alert onClose={handleClose} severity="error" sx={{ width: "100%" }}>
+          The email is already registerd!!
+        </Alert>
+      </Snackbar>
     </div>
   );
 };

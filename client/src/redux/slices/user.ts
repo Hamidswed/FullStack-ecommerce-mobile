@@ -7,10 +7,11 @@ type InitialType = {
 };
 const initialState: InitialType = {
   user: {
-    firstName:"",
-    lastName:"",
-    email:"",
-    password:""
+    _id: "",
+    firstName: "",
+    lastName: "",
+    email: "",
+    password: "",
   },
   isLogin: false,
 };
