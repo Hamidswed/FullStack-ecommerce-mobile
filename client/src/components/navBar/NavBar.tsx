@@ -6,6 +6,7 @@ import FormatListBulletedIcon from "@mui/icons-material/FormatListBulleted";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import { Link } from "react-router-dom";
 
 export default function NavBar() {
   return (
@@ -14,21 +15,31 @@ export default function NavBar() {
         <Logo />
       </div>
       <div className="navbar-menu">
-        <IconButton>
-          <HomeIcon />
-        </IconButton>
-        <IconButton>
-          <FormatListBulletedIcon />
-        </IconButton>
-        <IconButton>
-          <FavoriteIcon />
-        </IconButton>
-        <IconButton>
-          <ShoppingCartIcon />
-        </IconButton>
-        <IconButton>
-          <AccountCircleIcon />
-        </IconButton>
+        <Link to="/">
+          <IconButton>
+            <HomeIcon />
+          </IconButton>
+        </Link>
+        <Link to="/products">
+          <IconButton>
+            <FormatListBulletedIcon />
+          </IconButton>
+        </Link>
+        <Link to="/favorites">
+          <IconButton>
+            <FavoriteIcon />
+          </IconButton>
+        </Link>
+        <Link to="/cart">
+          <IconButton>
+            <ShoppingCartIcon />
+          </IconButton>
+        </Link>
+        <Link to="/login">
+          <IconButton>
+            <AccountCircleIcon />
+          </IconButton>
+        </Link>
       </div>
     </div>
   );

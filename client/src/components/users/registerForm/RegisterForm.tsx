@@ -1,0 +1,113 @@
+import { Button, TextField } from "@mui/material";
+import { Form, Formik } from "formik";
+import * as Yup from "yup";
+import axios from "axios";
+import "../loginForm/loginForm.css";
+import { useNavigate } from "react-router-dom";
+import { useState } from "react";
+import { UserType } from "../../../types/userType";
+
+const RegisterForm = () => {
+  const [isAvailable, setIsAvailable] = useState(false);
+  const initialValues: UserType = {
+    firstName: "",
+    lastName: "",
+    email: "",
+    password: "",
+  };
+
+  const SingUpSchema = Yup.object().shape({
+    firstName: Yup.string(),
+    lastName: Yup.string(),
+    email: Yup.string()
+      .email("Invalid email")
+      .required("Please Enter your email"),
+    password: Yup.string()
+      .min(7, "It should be more than 6 character")
+      .matches(
+        /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.{8,})/,
+        "Must Contain 8 Characters, One Uppercase, One Lowercase and One Number"
+      )
+      .required("Please Enter your password"),
+  });
+
+  const submitHandler = (values: UserType) => {
+    axios.post("http://localhost:8000/users", values).then((res) => {
+      console.log(res.data, "data");
+      if (res.data.message === "available") {
+        setIsAvailable(true);
+      } else res.status === 200 && navigate("/login");
+    });
+  };
+  const navigate = useNavigate();
+  return (
+    <div className="form-container">
+      <Formik
+        initialValues={initialValues}
+        onSubmit={submitHandler}
+        validationSchema={SingUpSchema}
+      >
+        {({ values, errors, touched, handleChange }) => {
+          return (
+            <Form className="form">
+              {isAvailable ? (
+                <p style={{ color: "red" }}>
+                  {values.email} is already registerd!
+                </p>
+              ) : null}
+              <div>
+                <TextField
+                  required
+                  name="firstName"
+                  label="FirstName"
+                  onChange={handleChange}
+                  value={values.firstName}
+                />
+              </div>
+              <div>
+                <TextField
+                  required
+                  name="lastName"
+                  label="LastName"
+                  onChange={handleChange}
+                  value={values.lastName}
+                />
+              </div>
+              <div>
+                <TextField
+                  required
+                  name="email"
+                  label="Email"
+                  onChange={handleChange}
+                  value={values.email}
+                />
+                {errors.email && touched.email && <p>{errors.email}</p>}
+              </div>
+              <div>
+                <TextField
+                  required
+                  name="password"
+                  label="Password"
+                  onChange={handleChange}
+                  value={values.password}
+                  type="password"
+                />
+                {errors.password && touched.password && (
+                  <p>{errors.password}</p>
+                )}
+              </div>
+
+              <Button variant="contained" type="submit">
+                Register
+              </Button>
+              <Button variant="outlined" onClick={() => navigate("/login")}>
+                Log in
+              </Button>
+            </Form>
+          );
+        }}
+      </Formik>
+    </div>
+  );
+};
+export default RegisterForm;
