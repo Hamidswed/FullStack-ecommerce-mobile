@@ -1,7 +1,11 @@
-import ProductList from "../components/products/productList/ProductList"
+import ProductList from "../components/products/productList/ProductList";
 
-const Products=()=>{
-  return <ProductList/>
-}
+const Products = () => {
+  return (
+    <div className="product-page">
+      <ProductList />
+    </div>
+  );
+};
 
-export default Products
+export default Products;

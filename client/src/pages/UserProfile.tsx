@@ -2,7 +2,7 @@ import Profile from "../components/users/userProfile/Profile";
 
 const UserProfile = () => {
   return (
-    <div>
+    <div className="profile-page">
       <Profile />
     </div>
   );

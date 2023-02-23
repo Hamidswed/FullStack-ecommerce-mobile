@@ -1,3 +1,9 @@
+*{
+  box-sizing: border-box;
+  margin: 0;
+  font-family: 'Lato', sans-serif;
+}
+
 .App {
   text-align: center;
 }
@@ -6,4 +12,11 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+.product-page,
+.favorite-page,
+.cart-page,
+.login-page,
+.profile-page {
+  padding: 100px 0;
 }

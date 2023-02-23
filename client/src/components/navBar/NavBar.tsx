@@ -9,15 +9,20 @@ import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { RootState } from "../../redux/store";
+import { useLocation } from "react-router-dom";
 
 export default function NavBar() {
   const user = useSelector((state: RootState) => state.user.user);
+  let { pathname } = useLocation();
+
   return (
-    <div className="navbar">
+    <div className={pathname === "/" ? "navbar" : "navbar navbar-blur"}>
       <div className="navbar-logo">
         <Logo />
       </div>
-      <div className="navbar-menu">
+      <div
+        className={pathname === "/" ? "btn-white navbar-menu" : "navbar-menu"}
+      >
         <Link to="/">
           <IconButton>
             <HomeIcon />
@@ -38,8 +43,8 @@ export default function NavBar() {
             <ShoppingCartIcon />
           </IconButton>
         </Link>
-        <Tooltip title={user.firstName!=="" ? `${user.firstName}` : "Login"}>
-          <Link to={user.firstName!=="" ? "/user" : "/login"}>
+        <Tooltip title={user.firstName !== "" ? `${user.firstName}` : "Login"}>
+          <Link to={user.firstName !== "" ? "/user" : "/login"}>
             <IconButton>
               <AccountCircleIcon />
             </IconButton>

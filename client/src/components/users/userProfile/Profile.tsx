@@ -1,18 +1,18 @@
-import { useState } from 'react';
-import { useSelector } from 'react-redux';
-import { RootState } from '../../../redux/store';
+import { useState } from "react";
+import { useSelector } from "react-redux";
+import { RootState } from "../../../redux/store";
 import { Button, TextField } from "@mui/material";
 import { Form, Formik } from "formik";
 import * as Yup from "yup";
 
 import axios from "axios";
-import { userActions } from '../../../redux/slices/user';
-import { useDispatch } from 'react-redux';
+import { userActions } from "../../../redux/slices/user";
+import { useDispatch } from "react-redux";
+import "./profile.css";
 
 const Profile = () => {
-
-  const user = useSelector((state:RootState)=>state.user.user)
-  const dispatch = useDispatch()
+  const user = useSelector((state: RootState) => state.user.user);
+  const dispatch = useDispatch();
 
   const [isEdit, setIsEdit] = useState(false);
 
@@ -39,12 +39,12 @@ const Profile = () => {
       })
       .then((res) => {
         console.log(res, "new information");
-        dispatch(userActions.getUser(res.data))
+        dispatch(userActions.getUser(res.data));
       });
   };
   console.log(isEdit, "isEdit");
   return (
-    <div>
+    <div className="information">
       <h3>UserInformation</h3>
       <Formik
         initialValues={initialValues}
@@ -53,17 +53,15 @@ const Profile = () => {
       >
         {({ values, errors, touched, handleChange }) => {
           return (
-            <Form className="info-container">
+            <Form className="information">
               <div>
                 {isEdit ? (
                   <div>
                     <TextField
                       required
                       name="firstName"
-                      label="FirstName"
+                      label={user?.firstName}
                       onChange={handleChange}
-                      // value={values.firstName}
-                      placeholder={user?.firstName}
                     />
                     {errors.firstName && touched.firstName ? (
                       <p>{errors.firstName}</p>
@@ -79,10 +77,8 @@ const Profile = () => {
                     <TextField
                       required
                       name="lastName"
-                      label="LastName"
+                      label={user?.lastName}
                       onChange={handleChange}
-                      // value={values.lastName}
-                      placeholder={user?.lastName}
                     />
                     {errors.lastName && touched.lastName ? (
                       <p>{errors.lastName}</p>
@@ -92,16 +88,35 @@ const Profile = () => {
                   <p>{user?.lastName}</p>
                 )}
               </div>
-              <p>{user?.email}</p>
+              <div>
+                {isEdit ? (
+                  <div>
+                    <TextField
+                      disabled
+                      name="email"
+                      label={user?.email}
+                      placeholder={user?.email}
+                    />
+                  </div>
+                ) : (
+                  <p>{user?.email}</p>
+                )}
+              </div>
               {isEdit ? (
-                <Button variant="contained" type="submit">
-                  Save
-                </Button>
+                <div className="profile-btn">
+                  <Button variant="outlined" onClick={() => setIsEdit(false)}>
+                    cancle
+                  </Button>
+                  <Button variant="contained" type="submit">
+                    Save
+                  </Button>
+                </div>
               ) : (
                 <Button
                   variant="outlined"
                   onClick={() => setIsEdit(true)}
                   type="button"
+                  sx={{marginTop:"20px"}}
                 >
                   Edit
                 </Button>

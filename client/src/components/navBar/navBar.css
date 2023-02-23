@@ -1,9 +1,18 @@
 .navbar{
+  position: fixed;
+  width: 100%;
+  z-index: 100;
+  top: 0;
+  left: 0;
   display: flex;
-  padding: 15px 80px;
-  height: 60px;
-  background-color: gray;
+  padding: 20px 80px;
+  height: 100px;
   align-items: center;
+  
+}
+.navbar-blur{
+  background: transparent;
+  backdrop-filter: blur(10px);
 }
 .navbar-logo{
   flex:2
@@ -16,4 +25,8 @@
   display: flex;
   justify-content: flex-end;
   gap: 30px;
+}
+
+.btn-white button{
+  color: #fff;
 }
