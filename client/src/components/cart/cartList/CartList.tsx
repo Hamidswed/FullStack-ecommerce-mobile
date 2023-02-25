@@ -75,19 +75,7 @@ const CartList = () => {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(productActions.totalPrice());
-    const token = localStorage.getItem("token");
-    const totalPrice = Number(localStorage.getItem("totalPrice"));
-    const order = { productOrder: cartList, totalPrice: totalPrice.toFixed(2) };
-    console.log(cartList, "cart list");
-    // console.log(order, "order local");
-    token &&
-      cartList.length !== 0 &&
-      axios
-        .post(`http://localhost:8000/orders/${user._id}`, order, {
-          headers: { Authorization: `Bearer ${token}` },
-        })
-        .then((res) => console.log(res.data, "order"));
-  }, [cartList, dispatch, user._id]);
+  });
 
   const cartRows = cartList.map((cart) => {
     return createData(
@@ -100,6 +88,23 @@ const CartList = () => {
       cart.description
     );
   });
+
+  const checkOut=()=>{
+    const token = localStorage.getItem("token");
+    const totalPrice = Number(localStorage.getItem("totalPrice"));
+    const order = { productOrder: cartList, totalPrice: totalPrice.toFixed(2) };
+   console.log(token,'token')
+   console.log(cartList.length,'length');
+    token &&
+      cartList.length !== 0 &&
+      axios
+        .post(`http://localhost:8000/orders/${user._id}`, order, {
+          headers: { Authorization: `Bearer ${token}` },
+        })
+        .then((res) => console.log(res.data, "order"));
+    handleClick()
+  }
+
   return (
     <div className="cart-list">
       {cartList.length === 0 ? (
@@ -143,7 +148,7 @@ const CartList = () => {
             </Table>
           </TableContainer>
           <div className="cart-total">
-            <CheckOutBTN variant="outlined" onClick={handleClick}>
+            <CheckOutBTN variant="outlined" onClick={checkOut}>
               Checkout
             </CheckOutBTN>
             <p>

@@ -55,6 +55,7 @@ const Profile = () => {
     localStorage.removeItem("user");
     localStorage.removeItem("cart");
     navigate("/login");
+    window.location.reload()
   };
   console.log(isEdit, "isEdit");
 
