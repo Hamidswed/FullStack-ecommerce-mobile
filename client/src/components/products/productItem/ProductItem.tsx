@@ -114,8 +114,8 @@ export default function ProductItem({ product }: PropType) {
           severity="success"
           sx={{ width: "100%" }}
         >
-          <strong>{cartList[index]?.quantity}</strong> {product.title} has been added
-          to cart!
+          <strong>{cartList[index]?.quantity}</strong> {product.title} has been
+          added to cart!
         </Alert>
       </Snackbar>
     </div>

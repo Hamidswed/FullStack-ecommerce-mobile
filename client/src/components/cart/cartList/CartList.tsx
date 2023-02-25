@@ -20,15 +20,16 @@ import { Link } from "react-router-dom";
 import { RootState } from "../../../redux/store";
 import { productActions } from "../../../redux/slices/product";
 import "./cartList.css";
+import axios from "axios";
 
 function createData(
   _id: string,
   title: string,
   price: number,
   productImage: string,
-  detailImage:string,
+  detailImage: string,
   quantity: number,
-  description:string
+  description: string
 ) {
   return {
     _id,
@@ -37,7 +38,7 @@ function createData(
     productImage,
     detailImage,
     quantity,
-    description
+    description,
   };
 }
 const CartList = () => {
@@ -66,16 +67,29 @@ const CartList = () => {
       border: "none",
     },
   });
-  const cartState = useSelector((state: RootState) => state.product.carts);
+  const cartList = useSelector((state: RootState) => state.product.carts);
+  const user = useSelector((state: RootState) => state.user.user);
   const totalPrice = useSelector(
     (state: RootState) => state.product.totalPrice
   );
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(productActions.totalPrice());
-  });
+    const token = localStorage.getItem("token");
+    const totalPrice = Number(localStorage.getItem("totalPrice"));
+    const order = { productOrder: cartList, totalPrice: totalPrice.toFixed(2) };
+    console.log(cartList, "cart list");
+    // console.log(order, "order local");
+    token &&
+      cartList.length !== 0 &&
+      axios
+        .post(`http://localhost:8000/orders/${user._id}`, order, {
+          headers: { Authorization: `Bearer ${token}` },
+        })
+        .then((res) => console.log(res.data, "order"));
+  }, [cartList, dispatch, user._id]);
 
-  const cartRows = cartState.map((cart) => {
+  const cartRows = cartList.map((cart) => {
     return createData(
       cart._id,
       cart.title,
@@ -88,7 +102,7 @@ const CartList = () => {
   });
   return (
     <div className="cart-list">
-      {cartState.length === 0 ? (
+      {cartList.length === 0 ? (
         <div className="cart-list-warning">
           <Tooltip title="Back to products">
             <Link to="/products">

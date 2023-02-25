@@ -7,6 +7,7 @@ export const createOrderController = async (req: Request, res: Response) => {
     const newOrder = new Order({
       userId: req.params.userId,
       productOrder: req.body.productOrder,
+      totalPrice: req.body.totalPrice,
     });
     const order = await OrderServices.createOrder(newOrder);
     res.json(order);
@@ -15,7 +16,10 @@ export const createOrderController = async (req: Request, res: Response) => {
   }
 };
 
-export const getOrderByUserIdController = async (req: Request, res: Response) => {
+export const getOrderByUserIdController = async (
+  req: Request,
+  res: Response
+) => {
   try {
     const foundOrder = await OrderServices.getOrderByUserId(req.params.userId);
     res.json(foundOrder);

@@ -59,13 +59,16 @@ const LogInForm = () => {
       .then((res) => res.data)
       .then((data) => {
         console.log(data, "data");
-        if (data.message !== "invalid") {
+        if (data.message === "invalid" || data.message === "wrong password!") {
+          handleClick();
+          return;
+        } else {
           dispatch(userActions.getUser(data.userData));
-        } else handleClick();
-
-        const token = data.token;
-        localStorage.setItem("token", token);
-        token && navigate("/user");
+          const token = data.token;
+          localStorage.setItem("token", token);
+          token && navigate("/user");
+        }
+       
       });
   };
 

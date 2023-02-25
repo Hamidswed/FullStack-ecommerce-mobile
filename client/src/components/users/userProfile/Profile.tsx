@@ -1,6 +1,6 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { RootState } from "../../../redux/store";
+import { AppDispatch, RootState } from "../../../redux/store";
 import { Button, TextField } from "@mui/material";
 import { Form, Formik } from "formik";
 import * as Yup from "yup";
@@ -9,12 +9,19 @@ import axios from "axios";
 import { userActions } from "../../../redux/slices/user";
 import { useDispatch } from "react-redux";
 import "./profile.css";
+import { useNavigate } from "react-router-dom";
+// import { fetchOrderData } from "./../../../redux/thunks/order";
 
 const Profile = () => {
   const user = useSelector((state: RootState) => state.user.user);
   const dispatch = useDispatch();
+  // const dispatchOrder = useDispatch<AppDispatch>();
 
   const [isEdit, setIsEdit] = useState(false);
+
+  // useEffect(() => {
+  //   dispatchOrder(fetchOrderData(user._id));
+  // }, [dispatchOrder, user._id]);
 
   type InitialType = {
     firstName: string;
@@ -42,7 +49,15 @@ const Profile = () => {
         dispatch(userActions.getUser(res.data));
       });
   };
+  const navigate = useNavigate();
+  const logOut = () => {
+    localStorage.removeItem("token");
+    localStorage.removeItem("user");
+    localStorage.removeItem("cart");
+    navigate("/login");
+  };
   console.log(isEdit, "isEdit");
+
   return (
     <div className="information">
       <h3>UserInformation</h3>
@@ -116,11 +131,19 @@ const Profile = () => {
                   variant="outlined"
                   onClick={() => setIsEdit(true)}
                   type="button"
-                  sx={{marginTop:"20px"}}
+                  sx={{ marginTop: "20px" }}
                 >
                   Edit
                 </Button>
               )}
+              <Button
+                variant="outlined"
+                onClick={logOut}
+                type="button"
+                sx={{ marginTop: "20px" }}
+              >
+                log out
+              </Button>
             </Form>
           );
         }}

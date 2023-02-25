@@ -3,8 +3,13 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { ProductType } from "../../types/productType";
 
 const favouriteItems =
-  localStorage.getItem("favorites") != null
+  localStorage.getItem("favorites") !== null
     ? JSON.parse(localStorage.getItem("favorites") as string)
+    : [];
+
+const cartItems =
+  localStorage.getItem("cart") !== null
+    ? JSON.parse(localStorage.getItem("cart") as string)
     : [];
 
 type InitialType = {
@@ -26,7 +31,7 @@ const initialState: InitialType = {
     description: "",
   },
   favorites: favouriteItems,
-  carts: [],
+  carts: cartItems,
   totalPrice: 0,
 };
 
@@ -47,8 +52,18 @@ const productSlice = createSlice({
 
       if (index === -1) {
         state.carts.push(action.payload);
+        localStorage.setItem(
+          "cart",
+          JSON.stringify(state.carts.map((item) => item))
+        );
       } else {
         state.carts[index].quantity++;
+        const cart = JSON.parse(localStorage.getItem("cart") as string);
+        cart[index].quantity = state.carts[index].quantity;
+        localStorage.setItem(
+          "cart",
+          JSON.stringify(state.carts.map((item) => item))
+        );
       }
     },
     removeFromCart: (state, action) => {
@@ -57,8 +72,18 @@ const productSlice = createSlice({
       );
       if (state.carts[index].quantity === 1 && index >= 0) {
         state.carts.splice(index, 1);
+        localStorage.setItem(
+          "cart",
+          JSON.stringify(state.carts.map((item) => item))
+        );
       } else {
         state.carts[index].quantity--;
+        const cart = JSON.parse(localStorage.getItem("cart") as string);
+        cart[index].quantity = state.carts[index].quantity;
+        localStorage.setItem(
+          "cart",
+          JSON.stringify(state.carts.map((item) => item))
+        );
       }
     },
     removeAll: (state, action) => {
@@ -66,11 +91,16 @@ const productSlice = createSlice({
         (item) => item._id === action.payload._id
       );
       index >= 0 && state.carts.splice(index, 1);
+      localStorage.setItem(
+        "cart",
+        JSON.stringify(state.carts.map((item) => item))
+      );
     },
     totalPrice: (state) => {
       state.totalPrice = state.carts.reduce((acc, curr) => {
         return acc + curr.quantity * curr.price;
       }, 0);
+      localStorage.setItem('totalPrice',JSON.stringify(state.totalPrice) )
     },
     addToFavorite: (state, action) => {
       const index = state.favorites.findIndex(

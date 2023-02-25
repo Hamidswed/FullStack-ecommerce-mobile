@@ -13,6 +13,7 @@ import { useLocation } from "react-router-dom";
 
 export default function NavBar() {
   const user = useSelector((state: RootState) => state.user.user);
+  const token = localStorage.getItem("token");
   const cartState = useSelector((state: RootState) => state.product.carts);
   const favState = useSelector((state: RootState) => state.product.favorites);
   const productDetail = useSelector(
@@ -80,8 +81,10 @@ export default function NavBar() {
             </StyledBadge>
           </Link>
         </Tooltip>
-        <Tooltip title={user.firstName !== "" ? `${user.firstName}` : "Login"}>
-          <Link to={user.firstName !== "" ? "/user" : "/login"}>
+        <Tooltip
+          title={token && user.firstName !== "" ? `${user.firstName}` : "Login"}
+        >
+          <Link to={token && user.firstName !== "" ? "/user" : "/login"}>
             <IconButton>
               <AccountCircleIcon />
             </IconButton>
