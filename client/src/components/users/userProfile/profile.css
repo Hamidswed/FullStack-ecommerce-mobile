@@ -1,4 +1,8 @@
+.profile-container{
+  display: flex;
+}
 .information{
+  flex: 1;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -15,4 +19,18 @@
 .profile-btn button{
   width: 100px;
   margin-top: 20px;
+}
+.user-info{
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  align-items: flex-start;
+}
+.user-info strong{
+  color: gray;
+  margin-right: 5px;
+}
+.order-list-container{
+  flex:1.5;
+  padding: 0 100px;
 }

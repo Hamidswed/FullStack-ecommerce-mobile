@@ -89,12 +89,10 @@ const CartList = () => {
     );
   });
 
-  const checkOut=()=>{
+  const checkOut = () => {
     const token = localStorage.getItem("token");
     const totalPrice = Number(localStorage.getItem("totalPrice"));
     const order = { productOrder: cartList, totalPrice: totalPrice.toFixed(2) };
-   console.log(token,'token')
-   console.log(cartList.length,'length');
     token &&
       cartList.length !== 0 &&
       axios
@@ -102,8 +100,8 @@ const CartList = () => {
           headers: { Authorization: `Bearer ${token}` },
         })
         .then((res) => console.log(res.data, "order"));
-    handleClick()
-  }
+    handleClick();
+  };
 
   return (
     <div className="cart-list">

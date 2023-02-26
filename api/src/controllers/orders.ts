@@ -27,3 +27,15 @@ export const getOrderByUserIdController = async (
     console.log(error);
   }
 };
+
+export const deleteOrderByIdController = async (
+  req: Request,
+  res: Response
+) => {
+  try {
+    const foundOrder = await OrderServices.deleteOrderById(req.params.id);
+    res.json(foundOrder);
+  } catch (error) {
+    console.log(error);
+  }
+};

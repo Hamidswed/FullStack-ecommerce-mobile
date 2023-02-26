@@ -1,0 +1,36 @@
+.order-list{
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+.order-container{
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  border: 1px solid #e5e5e5;
+  padding: 20px 0;
+  border-radius: 10px;
+  align-items: center;
+  position: relative;
+}
+.order-container p{
+  width: 25%;
+  border-right:1px solid #fca311;
+  border-left:1px solid #fca311;
+  padding:7px 10px;
+}
+.order-container span{
+  color: #fca311;
+}
+.order-item{
+  display: flex;
+  
+  gap: 10px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.order-container button{
+  position: absolute;
+  left: 17px;
+  bottom: 17px;
+}
