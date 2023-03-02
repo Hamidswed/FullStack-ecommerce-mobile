@@ -1,5 +1,3 @@
-// import { Button } from "@mui/material";
-// import axios from "axios";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../redux/store";
 import { ProductType } from "../../../types/productType";
