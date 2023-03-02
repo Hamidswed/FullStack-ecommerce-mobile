@@ -10,7 +10,7 @@ import "./App.css";
 import UserProfile from "./pages/UserProfile";
 import Register from "./pages/Register";
 
-export const url = "http://localhost:8000";
+export const url = "https://backend-fullstack-arsu.onrender.com";
 function App() {
   return (
     <div>
