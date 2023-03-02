@@ -1,5 +1,5 @@
-import { Button } from "@mui/material";
-import axios from "axios";
+// import { Button } from "@mui/material";
+// import axios from "axios";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../redux/store";
 import { ProductType } from "../../../types/productType";
@@ -9,16 +9,7 @@ import "./orderList.css";
 const OrderList = () => {
   const order = useSelector((state: RootState) => state.order.order);
   console.log(order, "order");
-  const deleteOrder=(id:string)=>{
-    const token = localStorage.getItem('token')
-    axios
-      .delete(`http://localhost:8000/orders/${id}`, {
-        headers: { Authorization: `Bearer ${token}` },
-      })
-      .then((res) => {
-        console.log(res, "order new");
-      });
-  }
+
   return (
     <div className="order-list">
       {order.map((order, index) => {
@@ -40,7 +31,6 @@ const OrderList = () => {
               })}
             </div>
             <p>Total price: ${order.totalPrice}</p>
-            <Button variant="outlined" color="error" onClick={()=>deleteOrder(order._id)}>delete</Button>
           </div>
         );
       })}

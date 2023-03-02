@@ -9,7 +9,7 @@ type PropType = {
   product: ProductType;
 };
 
-export default function MediaControlCard({ product }: PropType) {
+export default function OrderItem({ product }: PropType) {
   return (
     <Card sx={{ display: "flex", width: "320px" }}>
       <CardMedia
