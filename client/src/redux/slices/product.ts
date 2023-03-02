@@ -45,6 +45,9 @@ const productSlice = createSlice({
     getProductDetail: (state, action) => {
       state.productDetail = action.payload;
     },
+    getCartList: (state, action) => {
+      state.carts = action.payload;
+    },
     addToCart: (state, action: PayloadAction<ProductType>) => {
       const index = state.carts.findIndex(
         (item) => item._id === action.payload._id
@@ -100,7 +103,7 @@ const productSlice = createSlice({
       state.totalPrice = state.carts.reduce((acc, curr) => {
         return acc + curr.quantity * curr.price;
       }, 0);
-      localStorage.setItem('totalPrice',JSON.stringify(state.totalPrice) )
+      localStorage.setItem("totalPrice", JSON.stringify(state.totalPrice));
     },
     addToFavorite: (state, action) => {
       const index = state.favorites.findIndex(

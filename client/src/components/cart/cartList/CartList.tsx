@@ -21,6 +21,8 @@ import { RootState } from "../../../redux/store";
 import { productActions } from "../../../redux/slices/product";
 import "./cartList.css";
 import axios from "axios";
+import { url } from "../../../App";
+import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 
 function createData(
   _id: string,
@@ -42,6 +44,7 @@ function createData(
   };
 }
 const CartList = () => {
+  const [checkOutClicked, setCheckOutClicked] = useState(false);
   const [open, setOpen] = useState(false);
 
   const handleClick = () => {
@@ -96,25 +99,44 @@ const CartList = () => {
     token &&
       cartList.length !== 0 &&
       axios
-        .post(`https://backend-fullstack-arsu.onrender.com/orders/${user._id}`, order, {
+        .post(`${url}/orders/${user._id}`, order, {
           headers: { Authorization: `Bearer ${token}` },
         })
         .then((res) => console.log(res.data, "order"));
     handleClick();
+    setCheckOutClicked(true);
+    localStorage.removeItem("cart");
+    dispatch(productActions.getCartList([]));
   };
 
   return (
     <div className="cart-list">
       {cartList.length === 0 ? (
         <div className="cart-list-warning">
-          <Tooltip title="Back to products">
-            <Link to="/products">
-              <IconButton>
-                <AddShoppingCartOutlinedIcon sx={{ fontSize: "50px" }} />
-              </IconButton>
-            </Link>
-          </Tooltip>
-          <em>Please add product to cart!</em>
+          {checkOutClicked ? (
+            <CheckCircleIcon color="success" fontSize="large" />
+          ) : (
+            <Tooltip title="Back to products">
+              <Link to="/products">
+                <IconButton>
+                  <AddShoppingCartOutlinedIcon sx={{ fontSize: "50px" }} />
+                </IconButton>
+              </Link>
+            </Tooltip>
+          )}
+
+          {checkOutClicked ? (
+            <div>
+              <p>Your order is registerd!</p>
+              <Tooltip title="Back to products">
+                <Link to="/products">
+                  <Button sx={{ marginTop: "20px" }}>Back</Button>
+                </Link>
+              </Tooltip>
+            </div>
+          ) : (
+            <em>Please add product to cart!</em>
+          )}
         </div>
       ) : (
         <>

@@ -8,8 +8,9 @@ import ProductDetail from "./pages/ProductDetail";
 import Favorites from "./pages/Favorites";
 import "./App.css";
 import UserProfile from "./pages/UserProfile";
-import Register from './pages/Register';
+import Register from "./pages/Register";
 
+export const url = "http://localhost:8000";
 function App() {
   return (
     <div>

@@ -12,6 +12,7 @@ import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { url } from "../../../App";
 
 export type InitialType = {
   email: string;
@@ -55,7 +56,7 @@ const LogInForm = () => {
 
   const submitHandler = (values: InitialType) => {
     axios
-      .post("https://backend-fullstack-arsu.onrender.com/users/login", values)
+      .post(`${url}/users/login`, values)
       .then((res) => res.data)
       .then((data) => {
         console.log(data, "data");

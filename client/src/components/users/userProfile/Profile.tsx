@@ -13,6 +13,7 @@ import { useNavigate } from "react-router-dom";
 import { fetchOrderData } from "../../../redux/thunks/order";
 import OrderList from "../order/OrderList";
 import EditIcon from "@mui/icons-material/Edit";
+import { url } from "../../../App";
 
 const Profile = () => {
   const user = useSelector((state: RootState) => state.user.user);
@@ -48,7 +49,7 @@ const Profile = () => {
   const submitHandler = (values: InitialType) => {
     setIsEdit(false);
     axios
-      .put(`https://backend-fullstack-arsu.onrender.com/users/${user?._id}`, values, {
+      .put(`${url}/users/${user?._id}`, values, {
         headers: { Authorization: `Bearer ${token}` },
       })
       .then((res) => {

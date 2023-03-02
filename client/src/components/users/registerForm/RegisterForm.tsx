@@ -7,6 +7,7 @@ import "../loginForm/loginForm.css";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { UserType } from "../../../types/userType";
+import { url } from "../../../App";
 
 const RegisterForm = () => {
   const [open, setOpen] = useState(false);
@@ -50,7 +51,7 @@ const RegisterForm = () => {
   });
 
   const submitHandler = (values: UserType) => {
-    axios.post("https://backend-fullstack-arsu.onrender.com/users", values).then((res) => {
+    axios.post(`${url}/users`, values).then((res) => {
       console.log(res.data, "data");
       if (res.data.message === "available") {
         handleClick();
