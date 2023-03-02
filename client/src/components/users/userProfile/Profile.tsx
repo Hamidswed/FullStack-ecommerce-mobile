@@ -48,7 +48,7 @@ const Profile = () => {
   const submitHandler = (values: InitialType) => {
     setIsEdit(false);
     axios
-      .put(`https://phone-backend-onsg.onrender.com/users/${user?._id}`, values, {
+      .put(`https://backend-fullstack-arsu.onrender.com/users/${user?._id}`, values, {
         headers: { Authorization: `Bearer ${token}` },
       })
       .then((res) => {

@@ -55,7 +55,7 @@ const LogInForm = () => {
 
   const submitHandler = (values: InitialType) => {
     axios
-      .post("https://phone-backend-onsg.onrender.com/users/login", values)
+      .post("https://backend-fullstack-arsu.onrender.com/users/login", values)
       .then((res) => res.data)
       .then((data) => {
         console.log(data, "data");
