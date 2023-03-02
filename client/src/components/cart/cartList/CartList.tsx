@@ -96,7 +96,7 @@ const CartList = () => {
     token &&
       cartList.length !== 0 &&
       axios
-        .post(`http://localhost:8000/orders/${user._id}`, order, {
+        .post(`https://phone-backend-onsg.onrender.com/orders/${user._id}`, order, {
           headers: { Authorization: `Bearer ${token}` },
         })
         .then((res) => console.log(res.data, "order"));

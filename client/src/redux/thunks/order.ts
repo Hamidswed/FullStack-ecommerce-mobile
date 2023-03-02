@@ -4,7 +4,7 @@ import { orderActions } from "../slices/order";
 import axios from "axios";
 
 export function fetchOrderData(id: string) {
-  const url = `http://localhost:8000/orders/${id}`;
+  const url = `https://phone-backend-onsg.onrender.com/orders/${id}`;
   return async (dispatch: AppDispatch) => {
     const token = localStorage.getItem("token");
     axios

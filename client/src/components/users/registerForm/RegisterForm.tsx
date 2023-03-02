@@ -50,7 +50,7 @@ const RegisterForm = () => {
   });
 
   const submitHandler = (values: UserType) => {
-    axios.post("http://localhost:8000/users", values).then((res) => {
+    axios.post("https://phone-backend-onsg.onrender.com/users", values).then((res) => {
       console.log(res.data, "data");
       if (res.data.message === "available") {
         handleClick();
