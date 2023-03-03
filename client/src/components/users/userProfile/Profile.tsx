@@ -66,7 +66,8 @@ const Profile = () => {
   const navigate = useNavigate();
   const logOut = () => {
     localStorage.clear();
-    navigate("/login");
+    navigate("/");
+    window.location.reload();
   };
 
   const displayOrder = () => {
