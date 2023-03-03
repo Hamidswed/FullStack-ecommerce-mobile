@@ -5,8 +5,8 @@ import { Form, Formik } from "formik";
 import * as Yup from "yup";
 import { useState } from "react";
 import "./loginForm.css";
-import { useDispatch } from "react-redux";
-import { AppDispatch } from "../../../redux/store";
+import { useDispatch, useSelector } from "react-redux";
+import { AppDispatch, RootState } from "../../../redux/store";
 import { userActions } from "../../../redux/slices/user";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
@@ -21,6 +21,7 @@ export type InitialType = {
 const LogInForm = () => {
   const [open, setOpen] = useState(false);
   const [showPass, setShowPass] = useState(false);
+  const [loginClicked, setLoginClicked] = useState(false);
   const dispatch = useDispatch<AppDispatch>();
 
   const showPassHandler = () => {
@@ -28,6 +29,7 @@ const LogInForm = () => {
   };
   const handleClick = () => {
     setOpen(true);
+    setLoginClicked(false);
   };
 
   const handleClose = (
@@ -55,6 +57,7 @@ const LogInForm = () => {
   const navigate = useNavigate();
 
   const submitHandler = (values: InitialType) => {
+    setLoginClicked(true);
     axios
       .post(`${url}/users/login`, values)
       .then((res) => res.data)
@@ -69,7 +72,6 @@ const LogInForm = () => {
           localStorage.setItem("token", token);
           token && navigate("/user");
         }
-       
       });
   };
 
@@ -118,7 +120,13 @@ const LogInForm = () => {
                 ) : null}
               </div>
               <Button variant="contained" type="submit">
-                log in
+                {loginClicked ? (
+                  <span>
+                    <i className="fas fa-spinner fa-spin fa-xl" />
+                  </span>
+                ) : (
+                  "log in"
+                )}
               </Button>
               <Button variant="outlined" onClick={() => navigate("/register")}>
                 register
