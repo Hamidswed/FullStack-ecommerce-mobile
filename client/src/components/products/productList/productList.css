@@ -5,3 +5,9 @@
   padding: 70px 100px;
   gap: 20px;
 }
+.loading{
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  align-items: center;
+}

@@ -16,9 +16,17 @@ export default function ProductList() {
 
   return (
     <div className="product-list">
-      {productList.map((item) => {
-        return <ProductItem key={item._id} product={item} />;
-      })}
+      {productList.length !== 0 ? (
+        productList.map((item) => {
+          return <ProductItem key={item._id} product={item} />;
+        })
+      ) : (
+        <div className="loading">
+           <i className="fas fa-spinner fa-spin fa-xl" />
+           <em>Please wait...</em>
+        </div>
+       
+      )}
     </div>
   );
 }
