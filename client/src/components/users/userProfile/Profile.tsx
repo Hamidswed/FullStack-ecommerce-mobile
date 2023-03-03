@@ -17,11 +17,17 @@ import { url } from "../../../App";
 
 const Profile = () => {
   const user = useSelector((state: RootState) => state.user.user);
+  const order = useSelector((state: RootState) => state.order.order);
   const token = localStorage.getItem("token");
   const dispatch = useDispatch();
   const dispatchOrder = useDispatch<AppDispatch>();
 
   const [isEdit, setIsEdit] = useState(false);
+  const showOrderLocal =
+    localStorage.getItem("showOrder") !== null
+      ? JSON.parse(localStorage.getItem("showOrder") as string)
+      : false;
+  const [showOrder, setShowOrder] = useState(showOrderLocal);
 
   const CheckOutBTN = styled(Button)({
     color: "#fff",
@@ -59,14 +65,14 @@ const Profile = () => {
   };
   const navigate = useNavigate();
   const logOut = () => {
-    localStorage.removeItem("token");
-    localStorage.removeItem("user");
-    localStorage.removeItem("cart");
+    localStorage.clear();
     navigate("/login");
     window.location.reload();
   };
 
   const displayOrder = () => {
+    setShowOrder(true);
+    localStorage.setItem("showOrder", JSON.stringify(true));
     dispatchOrder(fetchOrderData(user._id));
   };
 
@@ -179,7 +185,22 @@ const Profile = () => {
         </Formik>
       </div>
       <div className="order-list-container">
-        <OrderList />
+        {order.length === 0 && !showOrder ? (
+          <h1>
+            Click{" "}
+            <Button
+              variant="text"
+              onClick={displayOrder}
+              type="button"
+              sx={{ marginTop: "20px" }}
+            >
+              orders
+            </Button>
+            to display orders
+          </h1>
+        ) : showOrder ? (
+          <OrderList />
+        ) : null}
       </div>
     </div>
   );

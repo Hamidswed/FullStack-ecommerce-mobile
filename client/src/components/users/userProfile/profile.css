@@ -34,3 +34,15 @@
   flex:1.5;
   padding: 0 100px;
 }
+.order-list-container h1{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  font-size: 30px;
+  color: #dee2e6;
+  font-weight: normal;
+}
+.order-list-container h1 button{
+  margin: 0;
+}

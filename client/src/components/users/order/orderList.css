@@ -3,6 +3,11 @@
   flex-direction: column;
   gap: 40px;
 }
+.order-list h1{
+  font-size: 30px;
+  color: #dee2e6;
+  font-weight: normal;
+}
 .order-container{
   display: flex;
   flex-direction: column;
@@ -33,4 +38,15 @@
   position: absolute;
   left: 17px;
   bottom: 17px;
+}
+.no-order{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.no-order button{
+  margin: 0;
+}
+.no-order a{
+  text-decoration: none;
 }

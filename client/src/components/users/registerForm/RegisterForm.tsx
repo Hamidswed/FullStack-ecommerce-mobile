@@ -8,9 +8,12 @@ import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { UserType } from "../../../types/userType";
 import { url } from "../../../App";
+import SuccessModal from "./SuccessModal";
 
 const RegisterForm = () => {
   const [open, setOpen] = useState(false);
+  const [openModal, setOpenModal] = useState(false);
+  const [userName, setUserName] = useState("");
 
   const handleClick = () => {
     setOpen(true);
@@ -55,7 +58,10 @@ const RegisterForm = () => {
       console.log(res.data, "data");
       if (res.data.message === "available") {
         handleClick();
-      } else res.status === 200 && navigate("/login");
+      } else if(res.status === 200){
+        setOpenModal(true) 
+        setUserName(values.firstName);
+      }
     });
   };
   const navigate = useNavigate();
@@ -121,6 +127,7 @@ const RegisterForm = () => {
           );
         }}
       </Formik>
+      <SuccessModal open={openModal} setOpen={setOpenModal} name={userName}/>
       <Snackbar open={open} autoHideDuration={3000} onClose={handleClose}>
         <Alert onClose={handleClose} severity="error" sx={{ width: "100%" }}>
           The email is already registerd!!
