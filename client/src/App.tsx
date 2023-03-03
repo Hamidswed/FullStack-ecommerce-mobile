@@ -9,6 +9,7 @@ import Favorites from "./pages/Favorites";
 import "./App.css";
 import UserProfile from "./pages/UserProfile";
 import Register from "./pages/Register";
+import Footer from "./components/footer/Footer";
 
 export const url = "https://backend-fullstack-arsu.onrender.com";
 function App() {
@@ -27,6 +28,7 @@ function App() {
           <Route path="/favorites" element={<Favorites />} />
           <Route path="/" element={<Home />} />
         </Routes>
+        <Footer />
       </div>
     </div>
   );
