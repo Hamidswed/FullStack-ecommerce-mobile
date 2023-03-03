@@ -67,7 +67,6 @@ const Profile = () => {
   const logOut = () => {
     localStorage.clear();
     navigate("/login");
-    window.location.reload();
   };
 
   const displayOrder = () => {
