@@ -6,6 +6,7 @@ import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import CopyrightIcon from "@mui/icons-material/Copyright";
 import InstagramIcon from "@mui/icons-material/Instagram";
 import { Link } from "react-router-dom";
+import "./footer.css";
 
 export default function Footer() {
   return (
@@ -27,7 +28,7 @@ export default function Footer() {
           zIndex: 100,
         }}
       >
-        <Toolbar>
+        <Toolbar className="footer">
           <Typography
             variant="body1"
             noWrap
@@ -36,60 +37,70 @@ export default function Footer() {
           >
             Copyright <CopyrightIcon fontSize="small" /> Mobile Studio | Created
             by{" "}
-            <Link
-              to="https://github.com/Hamidswed"
-              style={{ textDecoration: "none", color: "#fff" }}
-            >
+            <Link to="https://github.com/Hamidswed" target="_blank">
               <span>Hamid</span>
             </Link>
           </Typography>
           <Box sx={{ flexGrow: 1 }} />
           <Box sx={{ margin: "0 20px" }}>
-            <IconButton
-              size="large"
-              edge="end"
-              aria-label="account of current user"
-              aria-haspopup="true"
-              color="inherit"
+            <Link to="https://www.instagram.com/hrddesigner/" target="_blank">
+              <IconButton
+                size="large"
+                edge="end"
+                aria-label="account of current user"
+                aria-haspopup="true"
+                color="inherit"
+              >
+                <InstagramIcon />
+              </IconButton>
+            </Link>
+            <Link to="https://www.instagram.com/hrddesigner/" target="_blank">
+              <IconButton
+                size="large"
+                edge="end"
+                aria-label="account of current user"
+                aria-haspopup="true"
+                color="inherit"
+              >
+                <FacebookIcon />
+              </IconButton>
+            </Link>
+            <Link to="mailto:delshad.swdn@gmail.com" target="_blank">
+              <IconButton
+                size="large"
+                edge="end"
+                aria-label="account of current user"
+                aria-haspopup="true"
+                color="inherit"
+              >
+                <EmailIcon />
+              </IconButton>
+            </Link>
+            <Link to="https://wa.me/0046735883889" target="_blank">
+              <IconButton
+                size="large"
+                edge="end"
+                aria-label="account of current user"
+                aria-haspopup="true"
+                color="inherit"
+              >
+                <WhatsAppIcon />
+              </IconButton>
+            </Link>
+            <Link
+              to="https://www.linkedin.com/in/hamidreza-delshad/"
+              target="_blank"
             >
-              <InstagramIcon />
-            </IconButton>
-            <IconButton
-              size="large"
-              edge="end"
-              aria-label="account of current user"
-              aria-haspopup="true"
-              color="inherit"
-            >
-              <FacebookIcon />
-            </IconButton>
-            <IconButton
-              size="large"
-              edge="end"
-              aria-label="account of current user"
-              aria-haspopup="true"
-              color="inherit"
-            >
-              <EmailIcon />
-            </IconButton>
-            <IconButton
-              size="large"
-              edge="end"
-              aria-label="account of current user"
-              aria-haspopup="true"
-              color="inherit"
-            >
-              <WhatsAppIcon />
-            </IconButton>
-            <IconButton
-              size="large"
-              edge="end"
-              aria-label="account of current user"
-              aria-haspopup="true"
-              color="inherit"
-            >
-              <LinkedInIcon />
-            </IconButton>
+              <IconButton
+                size="large"
+                edge="end"
+                aria-label="account of current user"
+                aria-haspopup="true"
+                color="inherit"
+              >
+                <LinkedInIcon />
+              </IconButton>
+            </Link>
           </Box>
         </Toolbar>
       </AppBar>

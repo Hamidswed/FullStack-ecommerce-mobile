@@ -79,7 +79,7 @@ const Profile = () => {
   return (
     <div className="profile-container">
       <div className="information">
-        <h3>UserInformation</h3>
+        
         <Formik
           initialValues={initialValues}
           onSubmit={submitHandler}
@@ -88,6 +88,7 @@ const Profile = () => {
           {({ errors, touched, handleChange }) => {
             return (
               <Form className="user-info">
+                <h3>User Information</h3>
                 <div>
                   {isEdit ? (
                     <div>

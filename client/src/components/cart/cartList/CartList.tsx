@@ -140,7 +140,7 @@ const CartList = () => {
         </div>
       ) : (
         <>
-          <h3> Cart List</h3>
+          {/* <h3> Cart List</h3> */}
           <TableContainer component={Paper} style={{ marginTop: "50px" }}>
             <Table sx={{ minWidth: 650 }} aria-label="simple table">
               <TableHead>

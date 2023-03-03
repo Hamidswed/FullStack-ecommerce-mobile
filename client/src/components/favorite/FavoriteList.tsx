@@ -37,7 +37,6 @@ const FavoriteList = () => {
         </div>
       ) : (
         <Fragment>
-          <h3> Favourite List</h3>
           <TableContainer component={Paper} style={{ marginTop: "50px" }}>
             <Table sx={{ minWidth: 650 }} aria-label="simple table">
               <TableHead>
