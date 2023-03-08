@@ -1,4 +1,4 @@
-import { Alert, Button,IconButton, TextField } from "@mui/material";
+import { Alert, Button, IconButton, TextField } from "@mui/material";
 import Snackbar from "@mui/material/Snackbar";
 import { Form, Formik } from "formik";
 import * as Yup from "yup";
@@ -16,6 +16,7 @@ import VisibilityOff from "@mui/icons-material/VisibilityOff";
 const RegisterForm = () => {
   const [open, setOpen] = useState(false);
   const [showPass, setShowPass] = useState(false);
+  const [regClicked, setRegClicked] = useState(false);
   const [openModal, setOpenModal] = useState(false);
   const [userName, setUserName] = useState("");
 
@@ -25,6 +26,7 @@ const RegisterForm = () => {
 
   const handleClick = () => {
     setOpen(true);
+    setRegClicked(false)
   };
 
   const handleClose = (
@@ -62,6 +64,7 @@ const RegisterForm = () => {
   });
 
   const submitHandler = (values: UserType) => {
+    setRegClicked(true);
     axios.post(`${url}/users`, values).then((res) => {
       console.log(res.data, "data");
       if (res.data.message === "available") {
@@ -137,7 +140,13 @@ const RegisterForm = () => {
               </div>
 
               <Button variant="contained" type="submit">
-                Register
+                {regClicked && !openModal ? (
+                  <span>
+                    <i className="fas fa-spinner fa-spin fa-xl" />
+                  </span>
+                ) : (
+                  "register"
+                )}
               </Button>
               <Divider id="divider">
                 <span>OR</span>
