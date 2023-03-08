@@ -46,9 +46,13 @@ function createData(
 const CartList = () => {
   const [checkOutClicked, setCheckOutClicked] = useState(false);
   const [open, setOpen] = useState(false);
+  const [openLogin, setOpenLogin] = useState(false);
 
   const handleClick = () => {
     setOpen(true);
+  };
+  const handleClickLogin = () => {
+    setOpenLogin(true);
   };
 
   const handleClose = (
@@ -60,6 +64,16 @@ const CartList = () => {
     }
 
     setOpen(false);
+  };
+  const handleCloseLogin = (
+    event?: React.SyntheticEvent | Event,
+    reason?: string
+  ) => {
+    if (reason === "clickaway") {
+      return;
+    }
+
+    setOpenLogin(false);
   };
   const CheckOutBTN = styled(Button)({
     color: "#fff",
@@ -96,17 +110,19 @@ const CartList = () => {
     const token = localStorage.getItem("token");
     const totalPrice = Number(localStorage.getItem("totalPrice"));
     const order = { productOrder: cartList, totalPrice: totalPrice.toFixed(2) };
-    token &&
-      cartList.length !== 0 &&
+    if (token && cartList.length !== 0) {
       axios
         .post(`${url}/orders/${user._id}`, order, {
           headers: { Authorization: `Bearer ${token}` },
         })
         .then((res) => console.log(res.data, "order"));
-    handleClick();
-    setCheckOutClicked(true);
-    localStorage.removeItem("cart");
-    dispatch(productActions.getCartList([]));
+      handleClick();
+      setCheckOutClicked(true);
+      localStorage.removeItem("cart");
+      dispatch(productActions.getCartList([]));
+    } else {
+      handleClickLogin();
+    }
   };
 
   return (
@@ -140,7 +156,6 @@ const CartList = () => {
         </div>
       ) : (
         <>
-          {/* <h3> Cart List</h3> */}
           <TableContainer component={Paper} style={{ marginTop: "50px" }}>
             <Table sx={{ minWidth: 650 }} aria-label="simple table">
               <TableHead>
@@ -186,6 +201,19 @@ const CartList = () => {
       <Snackbar open={open} autoHideDuration={3000} onClose={handleClose}>
         <Alert onClose={handleClose} severity="success" sx={{ width: "100%" }}>
           Checkout is done!
+        </Alert>
+      </Snackbar>
+      <Snackbar
+        open={openLogin}
+        autoHideDuration={3000}
+        onClose={handleCloseLogin}
+      >
+        <Alert
+          onClose={handleCloseLogin}
+          severity="error"
+          sx={{ width: "100%" }}
+        >
+          Please Login or Register!
         </Alert>
       </Snackbar>
     </div>
