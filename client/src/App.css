@@ -8,6 +8,10 @@
   text-align: center;
 }
 
+.home-page{
+  background-color: black;
+}
+
 .login-page{
   position: relative;
   display: flex;
