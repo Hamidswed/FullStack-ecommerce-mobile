@@ -1,4 +1,4 @@
-import { Alert, Button, TextField } from "@mui/material";
+import { Alert, Button,IconButton, TextField } from "@mui/material";
 import Snackbar from "@mui/material/Snackbar";
 import { Form, Formik } from "formik";
 import * as Yup from "yup";
@@ -10,11 +10,18 @@ import { UserType } from "../../../types/userType";
 import { url } from "../../../App";
 import SuccessModal from "./SuccessModal";
 import Divider from "@mui/material/Divider";
+import Visibility from "@mui/icons-material/Visibility";
+import VisibilityOff from "@mui/icons-material/VisibilityOff";
 
 const RegisterForm = () => {
   const [open, setOpen] = useState(false);
+  const [showPass, setShowPass] = useState(false);
   const [openModal, setOpenModal] = useState(false);
   const [userName, setUserName] = useState("");
+
+  const showPassHandler = () => {
+    setShowPass(!showPass);
+  };
 
   const handleClick = () => {
     setOpen(true);
@@ -111,8 +118,19 @@ const RegisterForm = () => {
                   label="Password"
                   onChange={handleChange}
                   value={values.password}
-                  type="password"
+                  type={showPass ? "text" : "password"}
                 />
+                <span className="visibility visibility-reg">
+                  {showPass ? (
+                    <IconButton onClick={showPassHandler}>
+                      <VisibilityOff />
+                    </IconButton>
+                  ) : (
+                    <IconButton onClick={showPassHandler}>
+                      <Visibility />
+                    </IconButton>
+                  )}
+                </span>
                 {errors.password && touched.password && (
                   <p>{errors.password}</p>
                 )}
