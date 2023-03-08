@@ -12,6 +12,7 @@ import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import Divider from "@mui/material/Divider";
 import { url } from "../../../App";
 
 export type InitialType = {
@@ -128,6 +129,7 @@ const LogInForm = () => {
                   "log in"
                 )}
               </Button>
+              <Divider id="divider"><span>OR</span></Divider>
               <Button variant="outlined" onClick={() => navigate("/register")}>
                 register
               </Button>

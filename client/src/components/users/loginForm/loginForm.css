@@ -29,6 +29,10 @@
   font-size: 12px;
   margin: 5px 0;
 }
+#divider span{
+  color: gray;
+  font-size: 14px;
+}
 .welcome{
   font-size: 50px;
   font-weight: bold;

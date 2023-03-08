@@ -9,6 +9,7 @@ import { useState } from "react";
 import { UserType } from "../../../types/userType";
 import { url } from "../../../App";
 import SuccessModal from "./SuccessModal";
+import Divider from "@mui/material/Divider";
 
 const RegisterForm = () => {
   const [open, setOpen] = useState(false);
@@ -58,8 +59,8 @@ const RegisterForm = () => {
       console.log(res.data, "data");
       if (res.data.message === "available") {
         handleClick();
-      } else if(res.status === 200){
-        setOpenModal(true) 
+      } else if (res.status === 200) {
+        setOpenModal(true);
         setUserName(values.firstName);
       }
     });
@@ -120,6 +121,9 @@ const RegisterForm = () => {
               <Button variant="contained" type="submit">
                 Register
               </Button>
+              <Divider id="divider">
+                <span>OR</span>
+              </Divider>
               <Button variant="outlined" onClick={() => navigate("/login")}>
                 Log in
               </Button>
@@ -127,7 +131,7 @@ const RegisterForm = () => {
           );
         }}
       </Formik>
-      <SuccessModal open={openModal} setOpen={setOpenModal} name={userName}/>
+      <SuccessModal open={openModal} setOpen={setOpenModal} name={userName} />
       <Snackbar open={open} autoHideDuration={3000} onClose={handleClose}>
         <Alert onClose={handleClose} severity="error" sx={{ width: "100%" }}>
           The email is already registerd!!
