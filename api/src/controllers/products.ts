@@ -5,12 +5,13 @@ import ProductServices from "../services/products";
 
 export const createProductController = async (req: Request, res: Response) => {
   try {
+    const { title, price, productImage, detailImage, description } = req.body;
     const newProduct = new Product({
-      title: req.body.title,
-      price: req.body.price,
-      productImage: req.body.productImage,
-      detailImage: req.body.detailImage,
-      description: req.body.description,
+      title: title,
+      price: price,
+      productImage: productImage,
+      detailImage: detailImage,
+      description: description,
     });
     const product = await ProductServices.createProduct(newProduct);
     res.json(product);
