@@ -3,6 +3,7 @@ import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
+import { Link } from "react-router-dom";
 import { ProductType } from "../../../types/productType";
 
 type PropType = {
@@ -12,17 +13,19 @@ type PropType = {
 export default function OrderItem({ product }: PropType) {
   return (
     <Card sx={{ display: "flex", width: "320px" }}>
-      <CardMedia
-        component="img"
-        sx={{
-          width: 80,
-          height: "fit-content",
-          margin: "auto 0",
-          padding: "0 5px",
-        }}
-        image={product.productImage}
-        alt={product.title}
-      />
+      <Link to={`/products/${product._id}`}>
+        <CardMedia
+          component="img"
+          sx={{
+            width: 80,
+            height: "fit-content",
+            margin: "auto 0",
+            padding: "0 5px",
+          }}
+          image={product.productImage}
+          alt={product.title}
+        />
+      </Link>
       <Box sx={{ display: "flex", flexDirection: "column" }}>
         <CardContent sx={{ flex: "1 0 auto", textAlign: "left" }}>
           <Typography component="div" variant="h6">

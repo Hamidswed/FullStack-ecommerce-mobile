@@ -12,6 +12,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { productActions } from "./../../../redux/slices/product";
 import "./cartItem.css";
 import { RootState } from "../../../redux/store";
+import { Link } from "react-router-dom";
 
 type PropType = {
   cart: ProductType;
@@ -32,7 +33,9 @@ const CartItem = ({ cart }: PropType) => {
         }}
       >
         <TableCell component="th" scope="row" align="center">
-          <img src={cart.productImage} alt={cart.title} />
+          <Link to={`/products/${cart._id}`}>
+            <img src={cart.productImage} alt={cart.title} />
+          </Link>
         </TableCell>
         <TableCell align="center">{cart.title.slice(0, 20)}</TableCell>
         <TableCell align="center">
