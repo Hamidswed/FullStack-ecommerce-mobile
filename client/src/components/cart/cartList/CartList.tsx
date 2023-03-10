@@ -31,7 +31,7 @@ function createData(
   productImage: string,
   detailImage: string,
   quantity: number,
-  description: string
+  description: string,
 ) {
   return {
     _id,
@@ -168,6 +168,9 @@ const CartList = () => {
                   </TableCell>
                   <TableCell align="center">
                     <strong>Price</strong>
+                  </TableCell>
+                  <TableCell align="center">
+                    <strong>Stock</strong>
                   </TableCell>
                   <TableCell align="center">
                     <strong>Quantity</strong>

@@ -52,9 +52,10 @@ const productSlice = createSlice({
       const index = state.carts.findIndex(
         (item) => item._id === action.payload._id
       );
+      const updatedProductByQty = { ...action.payload, quantity: 1 };
 
       if (index === -1) {
-        state.carts.push(action.payload);
+        state.carts.push(updatedProductByQty);
         localStorage.setItem(
           "cart",
           JSON.stringify(state.carts.map((item) => item))
