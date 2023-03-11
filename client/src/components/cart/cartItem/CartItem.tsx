@@ -41,7 +41,9 @@ const CartItem = ({ cart }: PropType) => {
         <TableCell align="center">
           ${(cart.price * cart.quantity).toFixed(2)}
         </TableCell>
-        <TableCell align="center">{productList[index].quantity}</TableCell>
+        <TableCell align="center" sx={{ color: "#D32F2F" }}>
+          {productList[index].quantity}
+        </TableCell>
         <TableCell align="center">
           <Button
             variant="outlined"

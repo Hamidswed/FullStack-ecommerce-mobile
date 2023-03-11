@@ -11,8 +11,8 @@ import UserProfile from "./pages/UserProfile";
 import Register from "./pages/Register";
 import Footer from "./components/footer/Footer";
 
-// export const url = "https://backend-fullstack-arsu.onrender.com";
-export const url = "http://localhost:8000";
+export const url = "https://backend-fullstack-arsu.onrender.com";
+// export const url = "http://localhost:8000";
 function App() {
   return (
     <div>

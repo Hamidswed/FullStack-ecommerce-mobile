@@ -67,7 +67,6 @@ const Profile = () => {
   const logOut = () => {
     localStorage.clear();
     navigate("/");
-    window.location.reload();
   };
 
   const displayOrder = () => {
@@ -79,7 +78,6 @@ const Profile = () => {
   return (
     <div className="profile-container">
       <div className="information">
-        
         <Formik
           initialValues={initialValues}
           onSubmit={submitHandler}
