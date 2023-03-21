@@ -31,8 +31,8 @@ export const getProductListController = async (req: Request, res: Response) => {
 
 export const getProductByIdController = async (req: Request, res: Response) => {
   try {
-    const foundUser = await ProductServices.getProductById(req.params.id);
-    res.json(foundUser);
+    const foundProduct = await ProductServices.getProductById(req.params.id);
+    res.json(foundProduct);
   } catch (error) {
     console.log(error);
   }

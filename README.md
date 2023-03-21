@@ -1,4 +1,4 @@
-# Fullstack Project
+# Fullstack Project public
 
 ### [www.mobile-studio.com](https://frontend-fullstack.onrender.com/)
 
